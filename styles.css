@@ -1,0 +1,167 @@
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+
+.button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+
+#dueDateInput,
+#setReminderBtn {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+
+.filter-container,
+.sorting-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+
+.filter-container label,
+.sorting-container label {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+
+.filter-container input,
+.filter-container select,
+.sorting-container select {
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+
+#todoList {
+    list-style: none;
+    padding: 0;
+}
+
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 6px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+.priority-label {
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+
+.todo-item.done {
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+    text-decoration: line-through;
+}
+
+
+.empty-message {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}
+
+
+#searchInput {
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+
+#addTodoBtn {
+    background-color: #28a745;
+}
+
+
+#setReminderBtn {
+    background-color: #ffc107;
+}
+
+
+#applyFiltersBtn, #clearFiltersBtn {
+    background-color: #007bff;
+}
+
+
+.todo-list li {
+    cursor: grab;
+}
+
+.todo-list li:active {
+    cursor: grabbing;
+}
+
+.drag-over {
+    border: 2px dashed #555;
+    background-color: #f0f0f0;
+}
+
+
+
+#sortTodoBtn {
+    background-color: #17a2b8;
+}
+
+
+#viewBacklogsBtn, #viewActivityLogsBtn {
+    background-color: #dc3545;
+}
+
+
+#searchBtn, #clearSearchBtn {
+    background-color: #343a40;
+}
+
+
+@media (max-width: 500px) {
+    .input-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .input-container button,
+    .filter-container button,
+    .sorting-container button {
+        margin-top: 5px;
+    }
+}
