@@ -67,6 +67,132 @@
     padding: 0;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.form-container input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.form-container button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
+.sorting-container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#sortCriteria {
+    padding: 5px;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.drag-over {
+    border: 2px dashed #007BFF;
+}
+
+.subtask-form {
+    display: none;
+    margin-top: 5px;
+}
+
+.subtask-form input[type="text"] {
+    margin-right: 5px;
+    padding: 2px;
+    font-size: 14px;
+}
+
+
+
+
+.tag-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 12px;
+    margin-right: 5px;
+}
+
+.todo-item-content {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.subtask-form button {
+    padding: 2px 5px;
+    font-size: 14px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.subtask-form button:hover {
+    background-color: #0056b3;
+}
 
 .todo-item {
     display: flex;
@@ -148,7 +274,7 @@
     background-color: #dc3545;
 }
 
-/* General styles for the todo list */
+
 #todoList {
     list-style: none;
     padding: 0;
@@ -191,9 +317,9 @@ li {
     font-weight: bold;
     border-radius: 3px;
 }
-/* Rest of the CSS styles remain the same */
 
-/* Styles for category */
+
+
 .category {
     display: inline-block;
     margin-right: 5px;
