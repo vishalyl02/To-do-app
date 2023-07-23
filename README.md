@@ -26,6 +26,6 @@ Delete Todo: Users can remove tasks from the to-do list.
 <br>Arrange - Drag and Drop: Users can reorder tasks and subtasks using drag and drop.
 <br>Arrange - Within Tasks: Users can rearrange tasks within the same level.
 <br>Arrange - Within Subtasks: Users can rearrange subtasks under the same main task.
-
+<br>
 <br>
 Thank you !!
