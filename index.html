@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="note">
+            <p><strong>Note:</strong> The reminder feature is currently not fully functional.It is optional to use</p>
+        </div>
         <h1>Todo List</h1>
         <div class="input-container">
             <input type="text" id="todoInput" placeholder="Enter your task here...">
@@ -20,7 +23,10 @@
                 <option value="health">Health</option>
                 <option value="others">Others</option>
             </select>
-            <input type="datetime-local" id="dueDateInput">
+            <div class="due-date-container">
+                <label for="dueDateInput">Due Date:</label>
+                <input type="datetime-local" id="dueDateInput">
+            </div>
             <select id="priorityDropdown">
                 <option value="">Select Priority</option>
                 <option value="low">Low</option>
