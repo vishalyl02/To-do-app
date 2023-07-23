@@ -42,6 +42,18 @@ function renderTodoList(filteredTodos) {
     });
 }
 
+function viewBacklogs() {
+    const currentDate = new Date().toISOString().split('T')[0];
+    const backlogs = todos.filter(todo => !todo.done && todo.dueDate < currentDate);
+    renderTodoList(backlogs);
+}
+
+// Function to view activity logs (all completed tasks)
+function viewActivityLogs() {
+    const activityLogs = todos.filter(todo => todo.done);
+    renderTodoList(activityLogs);
+}
+
 // Function to add a new todo
 function addTodo() {
     const todoInput = document.getElementById('todoInput');
@@ -173,19 +185,6 @@ function viewReminderDetails(todo) {
     }
 }
 
-// Function to view activity logs for a todo
-function viewActivityLogs(todo) {
-    // You can implement the activity logs feature here.
-    // For simplicity, let's just display an alert with a message.
-    alert("Viewing Activity Logs for this task: Feature Coming Soon!");
-}
-
-// Function to view backlogs for a todo
-function viewBacklogs(todo) {
-    // You can implement the backlog feature here.
-    // For simplicity, let's just display an alert with a message.
-    alert("Viewing Backlogs for this task: Feature Coming Soon!");
-}
 
 // Event listener for the "View Reminder Details" button
 todoList.addEventListener('click', event => {
@@ -315,62 +314,66 @@ function sortTodoList() {
 
     renderTodoList(sortedTodos);
 }
-
 // Function to clear sorting and display all todos
 function clearSorting() {
     document.getElementById('sortCriteria').value = '';
     renderTodoList();
 }
 
-// Function to view backlogs (pending or missed tasks)
-function viewBacklogs() {
-    const currentDate = new Date().toISOString().split('T')[0];
-    const backlogs = todos.filter(todo => !todo.done && todo.dueDate < currentDate);
-    renderTodoList(backlogs);
-}
-
-// Function to view activity logs (all completed tasks)
-function viewActivityLogs() {
-    const activityLogs = todos.filter(todo => todo.done);
-    renderTodoList(activityLogs);
-}
 
 // Function to perform the search
 function search() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    let searchResults = [];
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const filteredTodos = todos.filter(todo => {
+        // Check for exact todo name
+        if (todo.text.toLowerCase() === searchTerm) {
+            return true;
+        }
 
-    // Exact Todo Search
-    searchResults = todos.filter(todo => todo.text.toLowerCase() === searchInput);
-
-    // Sub-tasks Search
-    todos.forEach(todo => {
+        // Check for subtasks
         if (todo.subtasks) {
-            const matchingSubtasks = todo.subtasks.filter(subtask => subtask.toLowerCase().includes(searchInput));
-            if (matchingSubtasks.length > 0) {
-                const matchingTodo = { ...todo, subtasks: matchingSubtasks };
-                searchResults.push(matchingTodo);
+            for (const subtask of todo.subtasks) {
+                if (subtask.toLowerCase().includes(searchTerm)) {
+                    return true;
+                }
             }
         }
+
+        // Check for similar words
+        const words = todo.text.toLowerCase().split(' ');
+        if (words.includes(searchTerm)) {
+            return true;
+        }
+
+        // Check for partial search
+        for (const word of words) {
+            if (word.startsWith(searchTerm)) {
+                return true;
+            }
+        }
+
+        // Check for tags
+        if (todo.tags && todo.tags.some(tag => tag.toLowerCase().includes(searchTerm))) {
+            return true;
+        }
+
+        return false;
     });
 
-    // Similar Words Search
-    if (searchResults.length === 0) {
-        searchResults = todos.filter(todo => todo.text.toLowerCase().includes(searchInput));
-    }
-
-    // Partial Search
-    if (searchResults.length === 0) {
-        searchResults = todos.filter(todo => todo.text.toLowerCase().includes(searchInput));
-    }
-
-    // Tags Search
-    if (searchResults.length === 0) {
-        searchResults = todos.filter(todo => todo.tags.some(tag => tag.toLowerCase().includes(searchInput)));
-    }
-
-    renderTodoList(searchResults);
+    renderTodoList(filteredTodos);
 }
+
+// Function to clear the search and display all todos
+function clearSearch() {
+    document.getElementById('searchInput').value = ''; // Clear the search input
+    renderTodoList(); // Render all todos again
+}
+
+// ... (Rest of the code)
+
+// ... (Rest of the code)
+
 
 // Function to handle the Date Auto Complete
 function autoCompleteDueDate(todoText) {
@@ -401,8 +404,30 @@ function autoCompleteDueDate(todoText) {
     }
 }
 
-// ... (Rest of the code)
-// ... (Previous code)
+// Function to allow dropping elements (required for drag and drop)
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+// Function to handle the drop event and reorder tasks/subtasks
+function handleDrop(event) {
+    event.preventDefault();
+    const sourceIndex = event.dataTransfer.getData('text/plain');
+    const targetIndex = event.target.getAttribute('data-index');
+
+    // Ensure both sourceIndex and targetIndex are defined and not equal
+    if (sourceIndex && targetIndex && sourceIndex !== targetIndex) {
+        // Reorder the todos array based on the drag and drop action
+        const draggedTodo = todos[sourceIndex];
+        todos.splice(sourceIndex, 1);
+        todos.splice(targetIndex, 0, draggedTodo);
+
+        // Update Local Storage and re-render the todo list
+        localStorage.setItem('todos', JSON.stringify(todos));
+        renderTodoList();
+    }
+}
+
 
 // Function to clear the search input and display all todos
 function clearSearch() {
@@ -441,69 +466,6 @@ function initialize() {
 }
 
 // Function to handle the dragstart event
-let draggedItem = null;
 
-function dragStart(event) {
-    draggedItem = event.target;
-    event.dataTransfer.effectAllowed = 'move';
-    // Set a custom data attribute to store the dragged item's ID
-    event.dataTransfer.setData('text/plain', draggedItem.dataset.id);
-}
-
-// Function to handle the dragover event
-function dragOver(event) {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
-    const targetItem = event.target;
-
-    // Highlight the drop position for tasks
-    if (targetItem.classList.contains('todo-item') || targetItem.classList.contains('subtasks')) {
-        event.target.classList.add('drag-over');
-    }
-}
-
-// Function to handle the drop event
-function drop(event) {
-    event.preventDefault();
-    const targetItem = event.target;
-
-    // Move the draggedItem before or after the targetItem
-    if (targetItem.classList.contains('todo-item')) {
-        targetItem.parentNode.insertBefore(draggedItem, targetItem);
-    } else if (targetItem.classList.contains('subtasks')) {
-        targetItem.appendChild(draggedItem);
-    }
-
-    // Remove the drag-over highlight class
-    targetItem.classList.remove('drag-over');
-
-    // Update the todo list order in the todos array
-    updateTodoListOrder();
-
-    // Save the updated todos to local storage
-    localStorage.setItem('todos', JSON.stringify(todos));
-}
-
-// Function to handle the dragleave event
-function dragLeave(event) {
-    const targetItem = event.target;
-    // Remove the drag-over highlight class when leaving the drop area
-    targetItem.classList.remove('drag-over');
-}
-
-// Function to update the todo list order in the todos array
-function updateTodoListOrder() {
-    const updatedTodos = [];
-    const todoList = document.getElementById('todoList');
-    const todoItems = todoList.getElementsByClassName('todo-item');
-
-    for (let i = 0; i < todoItems.length; i++) {
-        const todoId = parseInt(todoItems[i].dataset.id, 10);
-        const todo = todos.find(todo => todo.id === todoId);
-        updatedTodos.push(todo);
-    }
-
-    todos = updatedTodos;
-}
 // Initialize the todo list and event listeners
 initialize();
