@@ -9,8 +9,10 @@ function renderTodoList(filteredTodos) {
     const todosToRender = filteredTodos || todos;
     todosToRender.forEach((todo, index) => {
         const todoItem = document.createElement('li');
+        todoItem.classList.add('task-item') 
         todoItem.innerHTML = `
             <span class="todo-text ${todo.done ? 'done' : ''}">${todo.text}</span>
+            <span class="category">${todo.category}</span>
             <button class="subtask-btn" onclick="addSubtask(${index})">Add Subtask</button>
             <button class="edit-btn" onclick="editTodo(${index})">Edit</button>
             <button class="delete-btn" onclick="deleteTodo(${index})">Delete</button>
@@ -30,7 +32,12 @@ function renderTodoList(filteredTodos) {
             });
             todoItem.appendChild(subtaskList);
         }
-
+        if (todo.reminder) {
+            const reminderText = document.createElement('span');
+            reminderText.classList.add('reminder');
+            reminderText.innerText = `Reminder: ${todo.reminder}`;
+            todoItem.appendChild(reminderText);
+        }
         todoList.appendChild(todoItem);
     });
 }
@@ -71,12 +78,14 @@ function addTodo() {
     if (dueDate && isReminderSet(dueDate)) {
         scheduleReminder(newTodo);
     }
-
-    todos.push(newTodo);
+    todos.unshift(newTodo); // Add new todo to the beginning of the array
     localStorage.setItem('todos', JSON.stringify(todos));
     renderTodoList();
 
-    // Reset input fields after adding the todo
+    // Re-render the todo list with the new task on top
+    renderTodoList();
+
+    // Clear input fields after adding the task
     todoInput.value = '';
     categoryDropdown.value = '';
     dueDateInput.value = '';
@@ -294,10 +303,10 @@ function sortTodoList() {
             sortedTodos.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
             break;
         case 'priorityAsc':
-            sortedTodos.sort((a, b) => a.priority.localeCompare(b.priority));
+            sortedTodos.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
             break;
         case 'priorityDesc':
-            sortedTodos.sort((a, b) => b.priority.localeCompare(a.priority));
+            sortedTodos.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
             break;
         // Add more sorting criteria if needed
         default:
@@ -410,6 +419,7 @@ function clearLocalStorage() {
 // Function to initialize the todo list and event listeners
 function initialize() {
     // Render the todo list with initial data
+    document.addEventListener('DOMContentLoaded', function () {
     renderTodoList();
 
     // Add event listeners
@@ -422,6 +432,7 @@ function initialize() {
     document.getElementById('viewActivityLogsBtn').addEventListener('click', viewActivityLogs);
     document.getElementById('searchBtn').addEventListener('click', search);
     document.getElementById('clearSearchBtn').addEventListener('click', clearSearch);
+    });
     const todoList = document.getElementById('todoList');
     todoList.addEventListener('dragstart', dragStart);
     todoList.addEventListener('dragover', dragOver);
