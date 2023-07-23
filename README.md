@@ -1,6 +1,7 @@
 # To-do-app
 
-To-Do List Application Link : https://vishalyl02.github.io/To-do-app/
+To-Do List Application <br>Link : https://vishalyl02.github.io/To-do-app/
+<br>
 A simple and feature-rich to-do list application that allows users to manage tasks effectively and stay organized.
 <br>
 <h3>Features</h3>
