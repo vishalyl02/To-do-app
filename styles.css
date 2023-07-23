@@ -148,6 +148,93 @@
     background-color: #dc3545;
 }
 
+/* General styles for the todo list */
+#todoList {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.todo-text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.subtasks {
+    list-style: disc;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.due-date {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+}
+
+.priority {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+/* Rest of the CSS styles remain the same */
+
+/* Styles for category */
+.category {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.low {
+    background-color: #5CB85C;
+    color: #fff;
+}
+
+.medium {
+    background-color: #F0AD4E;
+    color: #fff;
+}
+
+.high {
+    background-color: #D9534F;
+    color: #fff;
+}
+
+.tags {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+/* Styles for buttons */
+button {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ddd;
+}
 
 #searchBtn, #clearSearchBtn {
     background-color: #343a40;
