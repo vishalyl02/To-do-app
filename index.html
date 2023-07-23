@@ -56,21 +56,30 @@
 
 <div class="filter-container">
     
-    <button id="viewActivityLogsBtn">View Activity Logs</button>
-    <button id="viewBacklogsBtn">View Backlogs</button>
+    <button onclick="viewBacklogs()">View Backlogs</button>
+    <button onclick="viewActivityLogs()">View Activity Logs</button>
+    
+    <div class="search">
+        <input type="text" id="searchInput" placeholder="Search tasks">
+        <button onclick="search()">Search</button>
+        <button onclick="clearSearch()">Clear Search</button>
+    </div>
 </div>
 
-        <div class="sorting-container">
-            <label for="sortCriteria">Sort By:</label>
-            <select id="sortCriteria">
-                <option value="">None</option>
-                <option value="dueDateAsc">Due Date (Ascending)</option>
-                <option value="dueDateDesc">Due Date (Descending)</option>
-                <option value="priorityAsc">Priority (Ascending)</option>
-                <option value="priorityDesc">Priority (Descending)</option>
-            </select>
-        </div>
-        <ul id="todoList"></ul>
+<div class="sorting-container">
+    <label for="sortCriteria">Sort By:</label>
+    <select id="sortCriteria" onchange="sortTodoList()">
+        <option value="">None</option>
+        <option value="dueDateAsc">Due Date (Ascending)</option>
+        <option value="dueDateDesc">Due Date (Descending)</option>
+        <option value="priorityAsc">Priority (Ascending)</option>
+        <option value="priorityDesc">Priority (Descending)</option>
+    </select>
+    <button onclick="clearSorting()">Clear Sorting</button>
+</div>
+        <ul id="todoList" ondragover="allowDrop(event)" ondrop="handleDrop(event)">
+            <!-- Todo items will be dynamically rendered here -->
+        </ul>
         <button onclick="clearLocalStorage()">Clear All Todos</button>
     </div>
     <script src="script.js"></script>
