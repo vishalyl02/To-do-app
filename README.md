@@ -3,7 +3,7 @@
 To-Do List Application
 A simple and feature-rich to-do list application that allows users to manage tasks effectively and stay organized.
 <br>
-Features
+<h3>Features</h3>
 <br>
 Add Todo: Users can add new tasks to the to-do list.
 <br>
