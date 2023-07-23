@@ -48,11 +48,6 @@ function viewBacklogs() {
     renderTodoList(backlogs);
 }
 
-// Function to view activity logs (all completed tasks)
-function viewActivityLogs() {
-    const activityLogs = todos.filter(todo => todo.done);
-    renderTodoList(activityLogs);
-}
 
 // Function to add a new todo
 function addTodo() {
@@ -370,9 +365,15 @@ function clearSearch() {
     renderTodoList(); // Render all todos again
 }
 
-// ... (Rest of the code)
 
-// ... (Rest of the code)
+function viewBacklogs() {
+    alert('View Backlogs feature is coming soon!');
+}
+
+// Function to view activity logs (coming soon)
+function viewActivityLogs() {
+    alert('View Activity Logs feature is coming soon!');
+}
 
 
 // Function to handle the Date Auto Complete
@@ -464,8 +465,5 @@ function initialize() {
     todoList.addEventListener('dragleave', dragLeave);
     todoList.addEventListener('drop', drop);
 }
-
-// Function to handle the dragstart event
-
 // Initialize the todo list and event listeners
 initialize();
