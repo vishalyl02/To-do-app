@@ -27,5 +27,6 @@ Delete Todo: Users can remove tasks from the to-do list.
 <br>Arrange - Within Tasks: Users can rearrange tasks within the same level.
 <br>Arrange - Within Subtasks: Users can rearrange subtasks under the same main task.
 <br>
+Note: Remainder featutre is not fully functional, It is optional to use
 <br>
 Thank you !!
