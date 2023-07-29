@@ -52,13 +52,13 @@ function viewBacklogs() {
 // Function to add a new todo
 function addTodo() {
     const todoInput = document.getElementById('todoInput');
-    const categoryDropdown = document.getElementById('categoryDropdown');
+    const categoryInput = document.getElementById('categoryInput'); // New category input element
     const dueDateInput = document.getElementById('dueDateInput');
     const priorityDropdown = document.getElementById('priorityDropdown');
     const tagsInput = document.getElementById('tagsInput');
 
     const todoText = todoInput.value.trim();
-    const category = categoryDropdown.value;
+    const category = categoryInput.value.trim(); // Get the category from the new input element
     const dueDate = dueDateInput.value;
     const priority = priorityDropdown.value;
     const tags = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag !== '');
@@ -89,16 +89,14 @@ function addTodo() {
     localStorage.setItem('todos', JSON.stringify(todos));
     renderTodoList();
 
-    // Re-render the todo list with the new task on top
-    renderTodoList();
-
     // Clear input fields after adding the task
     todoInput.value = '';
-    categoryDropdown.value = '';
+    categoryInput.value = '';
     dueDateInput.value = '';
     priorityDropdown.value = '';
     tagsInput.value = '';
 }
+
 // Function to set a reminder for a todo
 function setReminder(todo) {
     const reminderDateTime = prompt("Enter the reminder date and time (YYYY-MM-DD HH:mm):");
@@ -449,7 +447,7 @@ function initialize() {
     renderTodoList();
 
     // Add event listeners
-    document.getElementById('addTodoBtn').addEventListener('click', addTodo);
+    document.getElementById('addTodoBtn').addEventListener('click', addTodo); // Add event listener here
     document.getElementById('applyFiltersBtn').addEventListener('click', applyFilters);
     document.getElementById('clearFiltersBtn').addEventListener('click', clearFilters);
     document.getElementById('sortTodoBtn').addEventListener('click', sortTodoList);
@@ -458,7 +456,7 @@ function initialize() {
     document.getElementById('viewActivityLogsBtn').addEventListener('click', viewActivityLogs);
     document.getElementById('searchBtn').addEventListener('click', search);
     document.getElementById('clearSearchBtn').addEventListener('click', clearSearch);
-    });
+});
     const todoList = document.getElementById('todoList');
     todoList.addEventListener('dragstart', dragStart);
     todoList.addEventListener('dragover', dragOver);
