@@ -27,7 +27,7 @@ Delete Todo: Users can remove tasks from the to-do list.
 <br>Arrange - Within Tasks: Users can rearrange tasks within the same level.
 <br>Arrange - Within Subtasks: Users can rearrange subtasks under the same main task.
 <br>
-Note: a) Remainder featutre is not fully functional.It is optional to use
+Note: a) Remainder feature is not fully functional.It is optional to use
 <br>
 b) Data Auto Complete is not fully functional.
 <br>
@@ -37,4 +37,8 @@ d) Activity logs feature is not fully functional.
 <br>
 e) Arrange feature is not full functional.
 <br>
+
+
+Updated:
+Category input now has user input rather than previously drop down
 Thank you !!
